@@ -137,18 +137,18 @@ public class control : MonoBehaviour
         }
         saut = false;
     }
-     void OnCollisionEnter(Collision collision)
+     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.name == "sol")
+        if (collision.gameObject.CompareTag("Sol") == true)
         {
             isGrounded = true;
           
         }
     }
-     void OnCollisionExit(Collision collision)
+     void OnCollisionExit2D(UnityEngine.Collision2D collision)
     {
         Debug.Log("sortieA16");
-        if (collision.transform.name == "sol")
+        if (collision.gameObject.CompareTag("Sol") ==true)
         {
             isGrounded = false;
         }

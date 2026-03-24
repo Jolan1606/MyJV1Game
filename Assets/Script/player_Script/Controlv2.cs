@@ -17,12 +17,23 @@ public class Controlv2 : MonoBehaviour
     }
     private void FixedUpdate()
     {
-     
+        if (Input.GetKey(KeyCode.Q))
+        {
+
+            
+
+
+        }
 
 
 
 
 
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
