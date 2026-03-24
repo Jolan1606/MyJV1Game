@@ -17,7 +17,7 @@ public class control : MonoBehaviour
     private float jumpSpeed;
     public float jumpForce;
     private bool isjumping;
-    private bool isGrounded;
+   [SerializeField] private bool isGrounded;
     private void Awake()
     {
         jumpForce = 5f ;
@@ -38,7 +38,7 @@ public class control : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
 
-            Debug.Log("detecté");
+          
             gauche = true;
             
             if (Input.GetKey(KeyCode.LeftShift))
@@ -53,7 +53,7 @@ public class control : MonoBehaviour
         {
 
 
-            Debug.Log("detecté");
+            
 
             droite = true;
             if (Input.GetKey(KeyCode.LeftShift))
@@ -69,7 +69,7 @@ public class control : MonoBehaviour
 
         }
 
-
+        Debug.Log(isGrounded);
 
     }
     private void FixedUpdate()
@@ -77,7 +77,7 @@ public class control : MonoBehaviour
     {
         Debug.Log(isGrounded);
         if (isGrounded == false) 
-        { 
+        {
          objectVelocity.y += Physics.gravity.y * Time.fixedDeltaTime;
         }
         rb.linearVelocity = objectVelocity;
@@ -128,23 +128,26 @@ public class control : MonoBehaviour
 
         if (saut == true)  //fonction saut 
         {
-            
-            objectVelocity.y = jumpForce;          
-            isGrounded = false;
-          
+            if (isGrounded == true)
+            {
+                objectVelocity.y = jumpForce;
+                isGrounded = false;
+            }
+           
         }
         saut = false;
     }
-    private void OnCollisionEnter(Collision collision)
+     void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.name == "sol")
         {
             isGrounded = true;
-
+          
         }
     }
-    private void OnCollisionExit(Collision collision)
+     void OnCollisionExit(Collision collision)
     {
+        Debug.Log("sortieA16");
         if (collision.transform.name == "sol")
         {
             isGrounded = false;
@@ -152,6 +155,6 @@ public class control : MonoBehaviour
 
 
     }
-
+    
 
 }
