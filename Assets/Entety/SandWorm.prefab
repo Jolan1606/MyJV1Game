@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4556355860328494171}
   - component: {fileID: 7493418169910736513}
+  - component: {fileID: 6133939235660900148}
   m_Layer: 0
   m_Name: Damage zone
   m_TagString: Untagged
@@ -169,6 +170,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.9152555, y: 1.2925043}
   m_EdgeRadius: 0
+--- !u!114 &6133939235660900148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5643160038785414895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38d2d7cf2761c442b51e3fad1d7fb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Attack
+  attackCible: {fileID: 4534961468777441458, guid: 52503b2f63da21c4db8086faa692ab78, type: 3}
 --- !u!1 &6080205704948290304
 GameObject:
   m_ObjectHideFlags: 0
