@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
-{
-    public GameObject attackCible;
+public HealthSlider playerHealth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,20 +17,20 @@ public class Attack : MonoBehaviour
 
 
 
-    /*private IEnumerator Attack()
+    private IEnumerator Attack()
     {
       
 
 
 
 
-    }*/
-    private void OnTriggerEnter2D(Collider2D collision)
+    }
+    private void OnTrigger2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
            
-
+         startCoroutine (Attack());
 
         }
     }

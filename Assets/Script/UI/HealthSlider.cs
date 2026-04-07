@@ -22,7 +22,7 @@ public class HealthSlider : MonoBehaviour
             TakeDamage(5);
         }
     }
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         slider.value = health;
