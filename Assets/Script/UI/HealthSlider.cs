@@ -33,7 +33,7 @@ public class HealthSlider : MonoBehaviour
         if (health <= 0)
         {
 
-            Debug.Log("t'es mort conanard ");
+           // Debug.Log("t'es mort conanard ");
 
             health = maxHealth;
             slider.value = maxHealth;

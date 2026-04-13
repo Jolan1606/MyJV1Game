@@ -21,7 +21,7 @@ public class Emerge : MonoBehaviour
             }
             else
             {
-                Debug.Log("cadetecte");
+               // Debug.Log("cadetecte");
                 StartCoroutine(SmoothEmerge());
                 //SD.transform.position = transform.position = new Vector3(transform.position.x, transform.position.y + (float)1.5, transform.position.z);
                 alreadyTrigger = true;
