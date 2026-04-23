@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public bool pending; 
     public HealthSlider healthSlider;
+=======
+public HealthSlider playerHealth;
+>>>>>>> Stashed changes
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+     void Start()
     {
         pending = true;
     }
@@ -19,10 +23,15 @@ public class Attack : MonoBehaviour
 
 
 
+<<<<<<< Updated upstream
 
     private void OnTriggerStay2D(Collider2D collision)
+=======
+     IEnumerator SandAttack()
+>>>>>>> Stashed changes
     {
 
+<<<<<<< Updated upstream
         if (collision.gameObject.CompareTag("Player") == true)
         {
             Debug.Log("zone d'attaque activée");
@@ -31,6 +40,19 @@ public class Attack : MonoBehaviour
                 
                 StartCoroutine(frappe());
             }
+=======
+
+
+    yield return null;
+}
+     void OnTrigger2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+           
+         StartCoroutine (SandAttack());
+
+>>>>>>> Stashed changes
         }
     }
     private IEnumerator frappe()
