@@ -8,9 +8,16 @@ public class WaterSlider : MonoBehaviour
    public float MaxWater;
    public Slider slider;
    public HealthSlider healthSlider;
-   
+    public ControlV2 ControlV2;
+
     void Start()
     {
+        if (ControlV2 == null)
+        {
+            ControlV2 = Object.FindAnyObjectByType<ControlV2>();
+            if (ControlV2 == null)
+                Debug.LogError("ControlV2 introuvable ! Vérifie que ton Player est bien dans la scène.");
+        }
         if (healthSlider == null)
         {
             healthSlider = Object.FindAnyObjectByType<HealthSlider>();
@@ -50,6 +57,11 @@ public class WaterSlider : MonoBehaviour
             water -= 1;
             slider.value = water;
             yield return new WaitForSeconds(1f);
+            if (ControlV2.isrunning)
+            {
+                water -= 2;
+                slider.value = water;
+            }
         }
     }
     

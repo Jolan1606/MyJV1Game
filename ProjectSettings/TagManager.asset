@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sol
   - Checkpoint
+  - Ennemy
   layers:
   - Default
   - TransparentFX

@@ -4,12 +4,13 @@ public class ControlV2 : MonoBehaviour
 {
     [Header("Références")]
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    private Transform graphics;        
 
     [Header("Paramètres")]
     public float speed = 5f;
     public float runSpeed = 10f;
     public float jumpForce = 12f;
+    public bool isrunning => (gaucheRun || droiteRun);
 
     [Header("Ground Check")]
     [SerializeField] private bool isGrounded;
@@ -18,19 +19,26 @@ public class ControlV2 : MonoBehaviour
     [SerializeField] private Transform frontRayOrigin;
     [SerializeField] private float frontRayLength = 1.5f;
 
-    // Flags (comme ton code original)
+    // Flags
     private bool gauche;
     private bool droite;
     private bool gaucheRun;
     private bool droiteRun;
     private bool saut;
+   
 
     private bool isFacingRight = true;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        graphics = transform.Find("Graphics");
+
+        if (graphics == null)
+        {
+            
+            return;
+        }
 
         if (frontRayOrigin == null)
         {
@@ -42,7 +50,7 @@ public class ControlV2 : MonoBehaviour
         }
     }
 
-    void Update()
+    public void Update()
     {
         if (Input.GetKey(KeyCode.Q))
         {
@@ -63,7 +71,7 @@ public class ControlV2 : MonoBehaviour
     {
         Vector2 velocity = rb.linearVelocity;
 
-        // === MOUVEMENT ===
+        // Mouvement
         if (gauche)
         {
             velocity.x = gaucheRun ? -runSpeed : -speed;
@@ -81,7 +89,7 @@ public class ControlV2 : MonoBehaviour
             velocity.x = 0f;
         }
 
-        // === SAUT ===
+        // Saut
         if (saut && isGrounded)
         {
             velocity.y = jumpForce;
@@ -95,7 +103,7 @@ public class ControlV2 : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
-        // === ROTATION DU JOUEUR + TOUS LES ENFANTS ===
+        // Rotation du visuel + zone d'attaque fonctionnelle
         HandleFacing(velocity.x);
     }
 
@@ -107,20 +115,20 @@ public class ControlV2 : MonoBehaviour
         if (shouldFaceRight && !isFacingRight)
         {
             isFacingRight = true;
-            RotatePlayer();
+            RotateGraphics();
         }
         else if (shouldFaceLeft && isFacingRight)
         {
             isFacingRight = false;
-            RotatePlayer();
+            RotateGraphics();
         }
     }
 
-    private void RotatePlayer()
+    private void RotateGraphics()
     {
-        // Rotation 180° sur Y → tous les enfants (zone d’attaque, etc.) tournent avec
+        // 180° sur Y → le sprite ET la zone d'attaque tournent ensemble
         float targetY = isFacingRight ? 0f : 180f;
-        transform.rotation = Quaternion.Euler(0f, targetY, 0f);
+        graphics.rotation = Quaternion.Euler(0f, targetY, 0f);
     }
 
     // Ground Check
@@ -136,18 +144,11 @@ public class ControlV2 : MonoBehaviour
             isGrounded = false;
     }
 
-    // === GIZMO RAYCAST TOUJOURS VISIBLE DANS L'ÉDITEUR ===
     private void OnDrawGizmos()
     {
         if (frontRayOrigin == null) return;
-
         Gizmos.color = Color.red;
         Vector3 direction = isFacingRight ? Vector3.right : Vector3.left;
         Gizmos.DrawRay(frontRayOrigin.position, direction * frontRayLength);
-
-        // Petite flèche pour mieux voir la direction
-        Vector3 arrowPos = frontRayOrigin.position + direction * frontRayLength;
-        Gizmos.DrawLine(arrowPos, arrowPos + new Vector3(-direction.x * 0.2f, 0.2f, 0));
-        Gizmos.DrawLine(arrowPos, arrowPos + new Vector3(-direction.x * 0.2f, -0.2f, 0));
     }
 }
