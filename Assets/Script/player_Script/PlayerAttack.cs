@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
               
                 
                     Debug.Log("Attaque réussie !");
-                    SandHealth.TakeDamage(10f );
+                    SandHealth.TakeDamage(100f );
 
              
             }

@@ -61,11 +61,12 @@ public class WaterSlider : MonoBehaviour
             {
                 water -= 2;
                 slider.value = water;
+               
             }
         }
     }
     
-
+    
 
 }
 
