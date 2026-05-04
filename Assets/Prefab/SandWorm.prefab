@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 6080205704948290304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.22, y: -4.45, z: 0}
+  m_LocalPosition: {x: 2.34, y: -4.58, z: 0}
   m_LocalScale: {x: 0.3, y: 1.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -338,8 +338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29728aa8bcd9a844293a7373adf8e3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SandHealth
+  health: 100
   waterDrop: {fileID: 0}
   waterDropPrefab: {fileID: 8358037426009907193, guid: 034d2d5db99a6d64c8dbe950b20cd8b9, type: 3}
+  dropChance: 0
 --- !u!1 &6776180935196477520
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +353,7 @@ GameObject:
   - component: {fileID: 1268064582349842445}
   - component: {fileID: 8578034404100710894}
   - component: {fileID: 8231099294906359271}
+  - component: {fileID: 8340226217493355103}
   m_Layer: 0
   m_Name: 'trigger zone '
   m_TagString: Untagged
@@ -433,3 +436,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Emerge
   SD: {fileID: 6080205704948290304}
   emergeDuration: 1
+--- !u!114 &8340226217493355103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776180935196477520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1376bbecc0235ce43b21226dd234e07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Remarge
+  SD: {fileID: 6080205704948290304}
+  emergeDuration: 1
+  sHealth: {fileID: 0}
