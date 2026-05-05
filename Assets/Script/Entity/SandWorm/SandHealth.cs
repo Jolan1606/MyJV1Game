@@ -3,18 +3,13 @@ using UnityEngine.UI;
 
 public class SandHealth : MonoBehaviour
 {
-   private float health = 100f;
+   public float health = 100f;
     public Watersource waterDrop;
     public GameObject waterDropPrefab;
     public int dropChance ; // Chance de faire tomber une goutte d'eau (en pourcentage)
     void Start()
     {
-        /*if (waterDrop == null)
-        {
-            waterDrop = Object.FindAnyObjectByType<Watersource>();
-            if (waterDrop == null)
-                Debug.LogError("WaterDrop introuvable ! Vérifie que ton WaterDrop est bien dans la scène.");
-        }*/
+       
         if (waterDropPrefab == null)
         {
             waterDropPrefab = Object.FindAnyObjectByType<Watersource>().gameObject;

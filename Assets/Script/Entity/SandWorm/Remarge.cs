@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections;
 using Unity.Cinemachine;
 
-public class Emerge : MonoBehaviour
+public class Remarge : MonoBehaviour
 {
     public GameObject SD;
     private bool alreadyTrigger; 
     public float emergeDuration = 1.0f; // Durée de l’émergence en secondes 
- 
+   [SerializeField] private SandHealth sHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -15,27 +15,27 @@ public class Emerge : MonoBehaviour
     {
        
 
-        if (collision.gameObject.CompareTag("Player") == true)
+      
+        //recupere la vie pour le coulage
+        if (collision.gameObject.CompareTag("Ennemy") == true)
         {
-
-            if (alreadyTrigger == true)
-            {
-                return;
-            }
-            else
-            {
-               // Debug.Log("cadetecte");
-                StartCoroutine(SmoothEmerge());
-                //SD.transform.position = transform.position = new Vector3(transform.position.x, transform.position.y + (float)1.5, transform.position.z);
-                alreadyTrigger = true;
-            }
+            sHealth = collision.GetComponent<SandHealth>();
         }
-
-       
     }
     
-    private IEnumerator SmoothEmerge()
+   
+
+    private void FixedUpdate()
     {
+        if(sHealth.health < 40 )
+        {
+StartCoroutine(SmoothRemage());
+        }
+    }
+
+    IEnumerator SmoothRemage()
+    {
+
         if (SD == null) yield break;
 
         // Position de départ 
@@ -44,16 +44,16 @@ public class Emerge : MonoBehaviour
         // Position d'arrivée
         Vector3 targetPos = new Vector3(
             transform.position.x,
-            transform.position.y + 1.5f,
+            transform.position.y - 1.5f,
             transform.position.z
         );
-
+        
         float elapsed = 0f;
 
         while (elapsed < emergeDuration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / emergeDuration;           
+            float t = elapsed / emergeDuration;
 
             // Interpolation linéaire 
             SD.transform.position = Vector3.Lerp(startPos, targetPos, t);
@@ -64,9 +64,4 @@ public class Emerge : MonoBehaviour
         //  s’assure qu’il arrive pile à la fin
         SD.transform.position = targetPos;
     }
-
-
-    
-
-   
 }
