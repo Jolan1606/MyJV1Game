@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 6080205704948290304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.34, y: -4.58, z: 0}
+  m_LocalPosition: {x: 4.22, y: -4.45, z: 0}
   m_LocalScale: {x: 0.3, y: 1.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -341,7 +341,9 @@ MonoBehaviour:
   health: 100
   waterDrop: {fileID: 0}
   waterDropPrefab: {fileID: 8358037426009907193, guid: 034d2d5db99a6d64c8dbe950b20cd8b9, type: 3}
-  dropChance: 0
+  dropChance: 60
+  SD: {fileID: 6080205704948290304}
+  emergeDuration: 1
 --- !u!1 &6776180935196477520
 GameObject:
   m_ObjectHideFlags: 0

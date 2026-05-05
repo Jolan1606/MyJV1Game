@@ -11,7 +11,7 @@ public class Remarge : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
        
 
@@ -33,7 +33,7 @@ StartCoroutine(SmoothRemage());
         }
     }
 
-    IEnumerator SmoothRemage()
+   private  IEnumerator SmoothRemage()
     {
 
         if (SD == null) yield break;

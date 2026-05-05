@@ -2,7 +2,7 @@
 - Project name: MyJV1Game
 - Unity version: Unity 6000.3.6f1
 - Active game object:
-  - Name: trigger zone 
-  - Tag: Untagged
+  - Name: SandWorm
+  - Tag: Ennemy
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
