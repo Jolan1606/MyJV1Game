@@ -2,7 +2,7 @@
 - Project name: MyJV1Game
 - Unity version: Unity 6000.3.6f1
 - Active game object:
-  - Name: SandWorm (1)
-  - Tag: Ennemy
+  - Name: Personnagepourunity
+  - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
+
 public class ControlV2 : MonoBehaviour
 {
     [Header("Références")]
     private Rigidbody2D rb;
-    private Transform graphics;        
-
+    private Transform graphics;
+   
+    private bool isWalking => (gauche || droite) ;
     [Header("Paramètres")]
     public float speed = 5f;
     public float runSpeed = 10f;
@@ -48,10 +50,15 @@ public class ControlV2 : MonoBehaviour
             frontRayOrigin = frontObj.transform;
             frontRayOrigin.gameObject.hideFlags = HideFlags.HideInHierarchy;
         }
+       
     }
+    
 
     public void Update()
     {
+       
+
+
         if (Input.GetKey(KeyCode.Q))
         {
             gauche = true;
