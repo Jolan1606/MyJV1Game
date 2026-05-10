@@ -7,7 +7,8 @@ public class Emerge : MonoBehaviour
     public GameObject SD;
     private bool alreadyTrigger; 
     public float emergeDuration = 1.0f; // Durée de l’émergence en secondes 
- 
+    [SerializeField] private Animator animator;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -28,6 +29,7 @@ public class Emerge : MonoBehaviour
                 StartCoroutine(SmoothEmerge());
                 //SD.transform.position = transform.position = new Vector3(transform.position.x, transform.position.y + (float)1.5, transform.position.z);
                 alreadyTrigger = true;
+                animator.SetBool("Emerge", true);
             }
         }
 
@@ -36,6 +38,7 @@ public class Emerge : MonoBehaviour
     
     private IEnumerator SmoothEmerge()
     {
+      
         if (SD == null) yield break;
 
         // Position de départ 
@@ -63,6 +66,7 @@ public class Emerge : MonoBehaviour
 
         //  s’assure qu’il arrive pile à la fin
         SD.transform.position = targetPos;
+        animator.SetBool("Emerge", false);
     }
 
 

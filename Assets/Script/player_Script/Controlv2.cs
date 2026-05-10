@@ -6,7 +6,7 @@ public class ControlV2 : MonoBehaviour
     [Header("Références")]
     private Rigidbody2D rb;
     private Transform graphics;
-   
+    [SerializeField] private Animator animator;
     private bool isWalking => (gauche || droite) ;
     [Header("Paramètres")]
     public float speed = 5f;
@@ -52,26 +52,31 @@ public class ControlV2 : MonoBehaviour
         }
        
     }
-    
+
 
     public void Update()
     {
-       
-
-
-        if (Input.GetKey(KeyCode.Q))
-        {
-            gauche = true;
-            if (Input.GetKey(KeyCode.LeftShift)) gaucheRun = true;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            droite = true;
-            if (Input.GetKey(KeyCode.LeftShift)) droiteRun = true;
-        }
+        // Inputs 
+        gauche = Input.GetKey(KeyCode.Q);
+        droite = Input.GetKey(KeyCode.D);
+        gaucheRun = gauche && Input.GetKey(KeyCode.LeftShift);
+        droiteRun = droite && Input.GetKey(KeyCode.LeftShift);
 
         if (Input.GetKeyDown(KeyCode.Space))
             saut = true;
+
+        // = ANIMATION 
+        float currentSpeed = 0f;
+        if (gauche || droite)
+        {
+            currentSpeed = (gaucheRun || droiteRun) ? runSpeed : speed;
+        }
+        else
+        {
+            currentSpeed = 0f;
+        }
+        animator.SetFloat("Speed", currentSpeed);
+       
     }
 
     private void FixedUpdate()
