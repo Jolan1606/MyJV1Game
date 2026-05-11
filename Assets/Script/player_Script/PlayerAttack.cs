@@ -2,7 +2,8 @@
 
 public class PlayerAttack : MonoBehaviour
 {
-    private SandHealth currentTarget;   
+    private SandHealth currentTarget;
+    [SerializeField] private Animator animator;
 
     private void Update()
     {
@@ -10,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("Attaque déclenchée !");
+            animator.SetTrigger("attack");
 
             if (currentTarget != null)
             {

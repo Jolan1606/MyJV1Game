@@ -6,12 +6,13 @@ public class Attack : MonoBehaviour
 
     public bool pending;
     [SerializeField]
-    private HealthSlider healthSlider;
-
+   private HealthSlider healthSlider;
+    [SerializeField] private Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+       
         pending = true;
         if (healthSlider == null)
         {
@@ -53,12 +54,16 @@ public class Attack : MonoBehaviour
 
     private IEnumerator frappe()
     {
+
         pending = false;
+        animator.SetTrigger("attack");
         yield return new WaitForSeconds(1);
+        
         Debug.Log("tu prend des degats");
        healthSlider.TakeDamage(5);
        yield return new WaitForSeconds(1);
         pending = true;
+
     }
         
 
