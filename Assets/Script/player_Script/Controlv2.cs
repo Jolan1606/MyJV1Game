@@ -31,6 +31,11 @@ public class ControlV2 : MonoBehaviour
 
     private bool isFacingRight = true;
 
+    // coyote time & Input buffer
+
+   [SerializeField] private float coyoteTime = 0.2f;
+   [SerializeField] private float coyoteTimeCounter;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -76,7 +81,24 @@ public class ControlV2 : MonoBehaviour
             currentSpeed = 0f;
         }
         animator.SetFloat("Speed", currentSpeed);
-       
+
+
+        //coyote time 
+        if (isGrounded == true)
+        {
+
+            coyoteTimeCounter = coyoteTime;
+
+        }
+        else if (isGrounded == false)
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+            if (coyoteTimeCounter < 0)
+            { 
+                coyoteTimeCounter = 0;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -100,20 +122,26 @@ public class ControlV2 : MonoBehaviour
         {
             velocity.x = 0f;
         }
-
+        
         // Saut
-        if (saut && isGrounded)
+        if (saut && coyoteTimeCounter > 0f)
         {
             velocity.y = jumpForce;
             isGrounded = false;
             saut = false;
+            coyoteTimeCounter = 0f;
         }
         else
         {
             saut = false;
+          
+            
         }
 
         rb.linearVelocity = velocity;
+
+
+
 
         // Rotation du visuel + zone d'attaque fonctionnelle
         HandleFacing(velocity.x);

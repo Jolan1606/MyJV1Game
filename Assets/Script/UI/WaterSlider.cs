@@ -54,12 +54,12 @@ public class WaterSlider : MonoBehaviour
     {
         while (water > 0)
         {
-            water -= 1;
+            water -= 2;
             slider.value = water;
             yield return new WaitForSeconds(1f);
             if (ControlV2.isrunning)
             {
-                water -= 2;
+                water -= 4;
                 slider.value = water;
                
             }
