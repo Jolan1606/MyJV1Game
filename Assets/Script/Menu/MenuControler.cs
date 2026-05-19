@@ -5,7 +5,7 @@ public class MenuControler : MonoBehaviour
 {
  public void changeScene(string SceneTest)
  {
-   UnityEngine.SceneManagement.SceneManager.LoadScene("Main Level");
+   UnityEngine.SceneManagement.SceneManager.LoadScene("MainLevelR");
 
  }
     public void QuitGame()

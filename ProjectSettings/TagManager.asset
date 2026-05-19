@@ -7,6 +7,8 @@ TagManager:
   - Sol
   - Checkpoint
   - Ennemy
+  - Quit
+  - Start
   layers:
   - Default
   - TransparentFX
