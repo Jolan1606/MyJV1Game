@@ -1,73 +1,92 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-
     public bool pending;
-    [SerializeField]
-   private HealthSlider healthSlider;
+    [SerializeField] private HealthSlider healthSlider;
     [SerializeField] private Animator animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool playerInRange = false;           // ← nouveau
+    private Coroutine attackRoutine = null;       // ← gère la boucle continue
+
     void Start()
     {
-       
         pending = true;
+
         if (healthSlider == null)
         {
             healthSlider = Object.FindAnyObjectByType<HealthSlider>();
-
             if (healthSlider == null)
-                Debug.LogError("HealthSlider introuvable ! V�rifie que ton Player est bien dans la sc�ne.");
+                Debug.LogError("HealthSlider introuvable !");
         }
-
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    // ====================== ENTRÉE / SORTIE ======================
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-
-
-
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") == true)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("zone d'attaque activ�e");
-            if (pending == true)
-            {
+            playerInRange = true;
+            Debug.Log("zone d'attaque activée - boucle lancée");
 
-                StartCoroutine(frappe());
+            if (attackRoutine == null)                    // on lance la boucle UNE SEULE fois
+            {
+                attackRoutine = StartCoroutine(AttackLoop());
             }
         }
     }
 
-    
-
-
-    private IEnumerator frappe()
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
+            Debug.Log("joueur sorti - boucle arrêtée");
 
+            if (attackRoutine != null)
+            {
+                StopCoroutine(attackRoutine);
+                attackRoutine = null;
+            }
+        }
+    }
+
+    // ====================== BOUCLE D'ATTAQUE CONTINUE ======================
+    private IEnumerator AttackLoop()
+    {
+        while (playerInRange)           // tant qu'il reste dedans → on recommence à l'infini
+        {
+            if (pending)
+            {
+                yield return StartCoroutine(frappe());   // on attend que l'attaque complète se termine
+            }
+            else
+            {
+                yield return null;   // petite sécurité si pending est bloqué
+            }
+        }
+
+        attackRoutine = null;   // on nettoie une fois sorti
+    }
+
+    // ====================== UNE SEULE ATTAQUE ======================
+    public IEnumerator frappe()
+    {
         pending = false;
         animator.SetTrigger("attack");
-        yield return new WaitForSeconds(1);
-        
-        Debug.Log("tu prend des degats");
-       healthSlider.TakeDamage(5);
-       yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(1f);   // temps d'animation avant le coup
+
+        // Sécurité : si le joueur est sorti entre-temps, on annule les dégâts
+        if (playerInRange)
+        {
+            Debug.Log("tu prend des degats");
+            healthSlider.TakeDamage(5);
+        }
+
+        yield return new WaitForSeconds(1f);   // cooldown entre deux attaques
+
         pending = true;
-
     }
-        
-
-
-
-   
 }
